@@ -78,4 +78,4 @@ class Stack:
             else:
                 current = current.next
                 i -= 1
-        return False
+        return None
