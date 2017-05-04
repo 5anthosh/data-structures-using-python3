@@ -6,36 +6,36 @@ class Node:
 
 class Stack:
     def __init__(self):
-        self.size = 0
+        self.__size = 0
         self.head = None
 
     def push(self, data):
         temp = Node(data)
-        if self.size == 0:
+        if self.__size == 0:
             self.head = temp
-            self.size += 1
+            self.__size += 1
         else:
             temp.next = self.head
             self.head = temp
-            self.size += 1
+            self.__size += 1
 
     def pop(self):
-        if self.size > 0:
+        if self.__size > 0:
             data = self.head.data
             self.head = self.head.next
-            self.size -= 1
+            self.__size -= 1
             return data
         else:
             raise IndexError("Stack is empty")
 
     def __len__(self):
-        return self.size
+        return self.__size
 
     def __repr__(self):
         a = 'Empty'
-        if self.size == 1:
+        if self.__size == 1:
             return 'Top'+'('+str(self.head.data) + ')'
-        elif self.size == 0:
+        elif self.__size == 0:
             return a
         else:
             current = self.head
@@ -71,7 +71,7 @@ class Stack:
 
     def index(self, data):
         current = self.head
-        i = self.size - 1
+        i = self.__size - 1
         while current:
             if current.data == data:
                 return i
