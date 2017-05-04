@@ -7,26 +7,26 @@ class Node:
 
 class List:
     def __init__(self, a1=[]):
-        self.head = None
+        self.__head = None
         self.__size = 0
-        self.current = None
+        self.__current = None
         for i in a1:
             self.append(i)
 
     def append(self, data):
         temp = Node(data)
         if self.__size == 0:
-            self.head = temp
-            self.current = temp
+            self.__head = temp
+            self.__current = temp
             self.__size += 1
         else:
-            temp.prev = self.current
-            self.current.next = temp
-            self.current = temp
+            temp.prev = self.__current
+            self.__current.next = temp
+            self.__current = temp
             self.__size += 1
 
     def __repr__(self):
-        current = self.head
+        current = self.__head
         c = 0
         a2 = "[]"
         while current:
@@ -50,14 +50,14 @@ class List:
         return self.__size
 
     def __iter__(self):
-        current = self.head
+        current = self.__head
         while current:
             yield current.data
             current = current.next
         raise StopIteration
 
     def __contains__(self, item):
-        current = self.head
+        current = self.__head
         while current:
             if current.data == item:
                 return True
@@ -66,7 +66,7 @@ class List:
         return False
 
     def delete(self, data):
-        current = self.head
+        current = self.__head
         prev = None
         found = False
         while current:
@@ -81,31 +81,31 @@ class List:
             if prev:
                 if not current.next:
                     prev.next = None
-                    self.current = prev
+                    self.__current = prev
                 else:
                     prev.prev = current.prev
                     prev.next = current.next
             else:
-                self.head = current.next
+                self.__head = current.next
 
     def is_empty(self):
-        head = self.head
+        head = self.__head
         if not head:
             return True
         else:
             return False
 
     def insert(self, index, data):
-        current = self.head
+        current = self.__head
         temp = Node(data)
         i = 0
         if len(self) == 0:
             if index == 0:
                 self.append(data)
         elif index == 0:
-            temp.next = self.head
-            self.head.prev = temp
-            self.head = temp
+            temp.next = self.__head
+            self.__head.prev = temp
+            self.__head = temp
             self.__size += 1
         elif index > len(self)-1:
             raise IndexError("List out of range")
@@ -125,28 +125,28 @@ class List:
     def pop(self):
         if self.is_empty():
             raise IndexError('pop from empty list')
-        current = self.current
+        current = self.__current
         a = current.data
         prev = current.prev
         if prev:
             prev.next = None
             self.__size -= 1
-            self.current = prev
+            self.__current = prev
             return a
         else:
-            head = self.head
+            head = self.__head
             self.delete(head.data)
         return a
 
     def head1(self):
-        return self.head.data
+        return self.__head.data
 
     def extend(self, d=[]):
         for i in d:
             self.append(i)
 
     def index(self, data):
-        current = self.head
+        current = self.__head
         i = 0
         while current:
             if current.data == data:
