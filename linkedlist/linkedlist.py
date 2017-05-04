@@ -8,22 +8,22 @@ class Node:
 class List:
     def __init__(self, a1=[]):
         self.head = None
-        self.size = 0
+        self.__size = 0
         self.current = None
         for i in a1:
             self.append(i)
 
     def append(self, data):
         temp = Node(data)
-        if self.size == 0:
+        if self.__size == 0:
             self.head = temp
             self.current = temp
-            self.size += 1
+            self.__size += 1
         else:
             temp.prev = self.current
             self.current.next = temp
             self.current = temp
-            self.size += 1
+            self.__size += 1
 
     def __repr__(self):
         current = self.head
@@ -31,14 +31,14 @@ class List:
         a2 = "[]"
         while current:
             if c == 0:
-                if c == self.size-1:
+                if c == self.__size-1:
                     a2 = "[" + str(current.data) + "]"
-                elif c == self.size:
+                elif c == self.__size:
                     return a2
                 else:
                     c += 1
                     a2 = "[" + str(current.data)
-            elif c == self.size-1:
+            elif c == self.__size-1:
                 a2 += ", " + str(current.data) + "]"
             else:
                 a2 += ", " + str(current.data)
@@ -47,7 +47,7 @@ class List:
         return a2
 
     def __len__(self):
-        return self.size
+        return self.__size
 
     def __iter__(self):
         current = self.head
@@ -72,7 +72,7 @@ class List:
         while current:
             if current.data == data:
                 found = True
-                self.size -= 1
+                self.__size -= 1
                 break
             else:
                 prev = current
@@ -106,7 +106,7 @@ class List:
             temp.next = self.head
             self.head.prev = temp
             self.head = temp
-            self.size += 1
+            self.__size += 1
         elif index > len(self)-1:
             raise IndexError("List out of range")
         else:
@@ -117,7 +117,7 @@ class List:
                     temp.next = current
                     temp.prev = prev
                     current.prev = temp
-                    self.size += 1
+                    self.__size += 1
                     break
                 current = current.next
                 i += 1
@@ -130,7 +130,7 @@ class List:
         prev = current.prev
         if prev:
             prev.next = None
-            self.size -= 1
+            self.__size -= 1
             self.current = prev
             return a
         else:
