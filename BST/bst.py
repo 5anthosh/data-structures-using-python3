@@ -125,6 +125,7 @@ class Bst:
         current = self.root
         while current:
             if current.data == data:
+                self.size -= 1
                 break
             elif current.data < data:
                 current = current.right
@@ -183,14 +184,16 @@ class Bst:
                         parent.left = None
                 else:
                     self.root = None
-a = Bst()
-a.insert(23)
-a.insert(25)
-a.insert(24)
-a.insert(27)
-a.insert(26)
-a.insert(28)
-a.insert(22)
-print(a.lookup(28))
-a.delete(27)
-print(a.lookup(26))
+                    
+if __name__ == '__main__':
+    a = Bst()
+    a.insert(23)
+    a.insert(25)
+    a.insert(24)
+    a.insert(27)
+    a.insert(26)
+    a.insert(28)
+    a.insert(22)
+    print(a.lookup(28))
+    a.delete(27)
+    print(a.lookup(26))
